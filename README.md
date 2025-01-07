@@ -69,16 +69,36 @@ The app has:
 ---
 
 ## Technical Stack
+1. **STREAMLIT :**
+   - Acts as an interface.
+   - Provides a user-friendly interface for uploading PDFs and interacting with the app.
+   - Enables the creation of interactive widgets such as file uploaders, buttons, and chat input fields.
+   - Displays extracted content and conversation history in an organized manner.
+2. **Environment Setup (dotenv) :**
+   - Loads API keys securely.
+  
+3. **PyPDF2 :**
+   - The uploaded files are validated using PdfReader.
+   - Text is extracted page by page using the extract_text method.
+   - Error handling ensures corrupted or image-only PDFs do not disrupt the workflow.
+   - Extracted text is concatenated for all pages and prepared for splitting.
 
-| **Component**               | **Purpose**                                               |
-|-----------------------------|-----------------------------------------------------------|
-| **Streamlit**               | Frontend framework for the web app.                      |
-| **PyPDF2**                  | PDF text extraction.                                      |
-| **FAISS**                   | Vector store for similarity search.                      |
-| **LangChain**               | Chain and embedding management.                          |
-| **Google Generative AI**    | Embedding model and conversational LLM.                  |
-| **dotenv**                  | Environment variable management for API keys.            |
-| **Logging**                 | Logs errors and warnings for easier debugging.           |
+4. **Text Splitting (LangChain) :**
+   - The text is split into manageable chunks using RecursiveCharacterTextSplitter.
+   - Overlapping chunks ensure context is preserved across splits.
+   - These chunks are passed to the embedding model.
+
+5. **Embedding Creation (Google Generative AI) :**
+   - The text chunks produced during the text splitting phase are passed to the embedding model, Each chunk is treated as a standalone    piece of text to ensure it fits within the token limits of the model.
+   - The GoogleGenerativeAIEmbeddings model processes the text chunks and converts them into high-dimensional vectors, These vectors are mathematical representations that capture the semantic and contextual essence of the text.
+
+6. **FAISS (Facebook AI Similarity Search) :**
+   - Enables efficient similarity-based retrieval of text chunks.
+   - When a user asks a question, the app generates an embedding for the query and retrieves similar chunks from the vector store.
+
+7. **Conversational Model (LangChain + Google Generative AI) :**
+   - The ChatGoogleGenerativeAI model to generate responses based on the retrieved chunks and conversation history.
+   
 
 ---
 
@@ -95,29 +115,4 @@ The app has:
 
 4. **User-Friendly Interface**:
    - Simple upload and chat functionality with real-time feedback.
-
----
-
-## Use Cases
-
-1. **Research**:
-   - Academics can upload research papers and ask specific questions about their content.
-
-2. **Legal Documents**:
-   - Lawyers can quickly extract relevant clauses or information from lengthy contracts.
-
-3. **Manuals**:
-   - Technical teams can query user manuals for specific instructions.
-
-4. **Reports**:
-   - Analysts can extract insights from corporate reports without manual reading.
-
----
-
-## Installation and Usage
-
-1. **Clone the Repository**:
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
 
