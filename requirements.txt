@@ -1,8 +1,10 @@
-requirements.txt
 streamlit
 python-dotenv
 PyPDF2
 langchain
+langchain-community
 google-generativeai
 faiss-cpu
 langchain-google-genai
+python-io
+logging
