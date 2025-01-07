@@ -1,4 +1,5 @@
-# chatWithPdfA Streamlit-based web application that allows users to upload PDFs and chat with their content using Google's Gemini-Pro AI model. The application processes PDFs, converts them into embeddings, and enables natural language interactions with the document content.
+# chatWithPdf
+A Streamlit-based web application that allows users to upload PDFs and chat with their content using Google's Gemini-Pro AI model. The application processes PDFs, converts them into embeddings, and enables natural language interactions with the document content.
 🌟 Features
 
 PDF Processing: Upload and process single or multiple PDF documents
